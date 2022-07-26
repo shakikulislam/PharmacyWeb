@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>NuGet.Frameworks</id>
+    <version>6.2.1</version>
+    <title>NuGet.Frameworks</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>https://www.nuget.org/packages/NuGet.Frameworks/6.2.1/license</licenseUrl>
+    <projectUrl>https://aka.ms/nugetprj</projectUrl>
+    <iconUrl>https://api.nuget.org/v3-flatcontainer/nuget.frameworks/6.2.1/icon</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>NuGet's understanding of target frameworks.</description>
+    <summary />
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>nuget</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0" />
+      <group targetFramework=".NETFramework4.7.2" />
+      <group targetFramework="Unsupported0.0" />
+    </dependencies>
+  </metadata>
+</package>
