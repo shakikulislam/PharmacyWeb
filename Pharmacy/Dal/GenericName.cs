@@ -30,6 +30,8 @@ namespace Pharmacy.Dal
             {
                 _connection.Close();
             }
+
+            
         }
 
         public bool QueryExecute(string query)
@@ -69,6 +71,16 @@ namespace Pharmacy.Dal
             }
 
             return genericNameList;
+        }
+
+        public bool HasExist(Models.GenericName genericName)
+        {
+            DbConnection();
+            var cmd = new MySqlCommand("SELECT * FROM tbl_generic_name WHERE name='" + genericName.Name + "'", _connection);
+            var da = new MySqlDataAdapter(cmd);
+            var dt = new DataTable();
+            da.Fill(dt);
+            return dt.Rows.Count > 0;
         }
     }
 }

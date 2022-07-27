@@ -928,6 +928,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bll\GenericName.cs" />
     <Compile Include="Common\DbConnection.cs" />
+    <Compile Include="Common\Pager.cs" />
     <Compile Include="Controllers\GenericNamesController.cs" />
     <Compile Include="Dal\GenericName.cs" />
     <Compile Include="Global.asax.cs">

@@ -11,7 +11,6 @@ namespace Pharmacy.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
         public string Create_by { get; set; }
 
         public DateTime Create_date { get; set; }
