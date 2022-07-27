@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Razor;
@@ -10,7 +11,8 @@ namespace Pharmacy.Controllers
 {
     public class GenericNamesController : Controller
     {
-        public List<GenericName> Pagination(List<GenericName> dataList, int currentPage)
+        private int currPage = 1;
+        public List<GenericName> PaginationList(List<GenericName> dataList, int currentPage)
         {
             int pageSize = 3;
             if (currentPage < 1)
@@ -18,6 +20,7 @@ namespace Pharmacy.Controllers
                 currentPage = 1;
             }
 
+            currPage = currentPage;
             int countGeneric = dataList.Count;
 
             var pager = new Pager(countGeneric, currentPage, pageSize);
@@ -26,22 +29,26 @@ namespace Pharmacy.Controllers
 
             var data = dataList.Skip(recSkip).Take(pager.PageSize).ToList();
 
-            this.ViewBag.Pager = pager;
+            ViewBag.Pager = pager;
+
+            int slNumber = ((pageSize * currentPage) - pageSize) + 1;
+
+            ViewBag.slNum = slNumber;
 
             return data;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int pg=1)
         {
             var genericNameList = new Dal.GenericName().ListOfGenericNames();
 
-            var dataList = Pagination(genericNameList, 1);
+            var dataList = PaginationList(genericNameList, pg);
 
             return View(dataList);
         }
 
         [HttpPost]
-        public ActionResult Index(GenericName genericName, int pg)
+        public ActionResult Index(GenericName genericName)
         {
             var query = "INSERT INTO tbl_generic_name (name, create_by) VALUES('" + genericName.Name + "','" + genericName.Create_by + "') ";
 
@@ -66,21 +73,20 @@ namespace Pharmacy.Controllers
                     ViewBag.FMsg = "Failed. This name already exist.";
                 }
 
-                
             }
+
             var genericNameList = new Dal.GenericName().ListOfGenericNames();
-            var dataList = Pagination(genericNameList, pg);
+
+            var dataList = PaginationList(genericNameList, currPage);
 
             return View(dataList);
         }
 
-        public void Update(GenericName genericName)
+        [HttpPost]
+        public ActionResult Update()
         {
-
+            return View();
         }
-
-        
-
 
     }
 }

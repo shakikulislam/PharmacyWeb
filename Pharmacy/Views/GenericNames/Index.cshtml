@@ -14,6 +14,7 @@
         pager = ViewBag.Pager;
         pageNo = pager.CurrentPage;
     }
+
 }
 
 <div class="page-header">
@@ -77,7 +78,7 @@
                         
 
                         @{
-                            var sl = 1;
+                            var sl = ViewBag.slNum;
 
                             foreach (var row in Model)
                             {
@@ -87,7 +88,7 @@
                                     </td>
                                     <td>@row.Name</td>
                                     <td>
-                                        @Html.ActionLink("Edit", "Update", "GenericNames", new { row.Id }, new { @class = "btn btn-sm btn-primary" })
+                                        @Html.ActionLink("Edit", "Update", "GenericNames", new {id = row.Id }, new { @class = "btn btn-sm btn-primary" })
                                     </td>
                                 </tr>
                             }
@@ -134,32 +135,32 @@
                         <div class="mt-3">
                             @if (pager.TotalPages > 0)
                             {
-                                <ul class="pagination justify-content-center">
+                                <ul class="pagination pagination-sm justify-content-center">
                                     
                                     @if (pager.CurrentPage > 1)
                                     {
                                         <li class="page-item">
-                                            @Html.ActionLink("First", "Index", "GenericNames", 1, new { @class = "page-link" })
+                                            @Html.ActionLink("First", "Index", "GenericNames", new { pg = 1 }, new { @class = "page-link border" })
                                         </li>
                                         <li>
-                                            @Html.ActionLink("Previous", "Index", "GenericNames", @pager.CurrentPage-1, new { @class = "page-link" })
+                                            @Html.ActionLink("Previous", "Index", "GenericNames", new { pg = pager.CurrentPage - 1 }, new { @class = "page-link border" })
                                         </li>
                                     }
 
-                                    @for (var pge = pager.StartPage; pge < pager.EndPage; pge++)
+                                    @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
                                     {
                                         <li class="page-item @(pge == pager.CurrentPage ? "active" : "")">
-                                            @Html.ActionLink(pge.ToString(), "Index", "GenericNames", pge, new {@class = "page-link"})
+                                            @Html.ActionLink(pge.ToString(), "Index", "GenericNames", new { pg = pge }, new { @class = "page-link border" })
                                         </li>
                                     }
 
                                     @if (pager.CurrentPage < pager.TotalPages)
                                     {
                                         <li class="page-item">
-                                            @Html.ActionLink("Next", "Index", "GenericNames", pager.CurrentPage+1, new {@class = "page-link"})
+                                            @Html.ActionLink("Next", "Index", "GenericNames", new { pg = pager.CurrentPage + 1 }, new { @class = "page-link border" })
                                         </li>
                                         <li>
-                                            @Html.ActionLink("Last", "Index", "GenericNames", pager.TotalPages, new {@class = "page-link"})
+                                            @Html.ActionLink("Last", "Index", "GenericNames", new { pg = pager.TotalPages }, new { @class = "page-link border" })
                                         </li>
                                     }
 
