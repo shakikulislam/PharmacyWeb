@@ -24,8 +24,8 @@ namespace Pharmacy.Common
             int totalPages = (int) Math.Ceiling((decimal) totalItems / (decimal) pageSize);
             int currentPage = page;
 
-            int startPage = currentPage - 5;
-            int endPage = currentPage + 4;
+            int startPage = currentPage - 2;
+            int endPage = currentPage + 2;
 
             if (startPage<=0)
             {

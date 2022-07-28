@@ -26,6 +26,9 @@
 
     <!-- End layout styles -->
     <link rel="shortcut icon" href="~/Template/assets/images/favicon.png" />
+    
+    @RenderSection("Style",false)
+
 </head>
 
 <body>
@@ -448,7 +451,10 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="~/Template/assets/js/dashboard.js"></script>
-    <!-- End custom js for this page -->
+<!-- End custom js for this page -->
+
+
+@RenderSection("Script", false)
 </body>
 
 </html>

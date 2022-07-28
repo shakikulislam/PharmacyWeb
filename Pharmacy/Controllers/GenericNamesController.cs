@@ -11,22 +11,23 @@ namespace Pharmacy.Controllers
 {
     public class GenericNamesController : Controller
     {
-        private int currPage = 1;
+        private int _currPage = 1;
+
         public List<GenericName> PaginationList(List<GenericName> dataList, int currentPage)
         {
-            int pageSize = 3;
+
             if (currentPage < 1)
             {
                 currentPage = 1;
             }
 
-            currPage = currentPage;
+            int pageSize = 10;
+
+            _currPage = currentPage;
+
             int countGeneric = dataList.Count;
-
             var pager = new Pager(countGeneric, currentPage, pageSize);
-
             int recSkip = (currentPage + -1) * pageSize;
-
             var data = dataList.Skip(recSkip).Take(pager.PageSize).ToList();
 
             ViewBag.Pager = pager;
@@ -77,15 +78,15 @@ namespace Pharmacy.Controllers
 
             var genericNameList = new Dal.GenericName().ListOfGenericNames();
 
-            var dataList = PaginationList(genericNameList, currPage);
+            var dataList = PaginationList(genericNameList, _currPage);
 
             return View(dataList);
         }
 
         [HttpPost]
-        public ActionResult Update()
+        public ActionResult Update(GenericName genericName)
         {
-            return View();
+            return View("Index");
         }
 
     }
