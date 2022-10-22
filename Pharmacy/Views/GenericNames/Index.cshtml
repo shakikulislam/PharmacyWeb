@@ -5,12 +5,12 @@
 @{
     ViewBag.Title = "Index";
 
-    Pager pager = new Pager();
-    
-    if (ViewBag.Pager !=null)
-    {
-        pager = ViewBag.Pager;
-    }
+    //Pager pager = new Pager();
+
+    //if (ViewBag.Pager != null)
+    //{
+    //    pager = ViewBag.Pager;
+    //}
 
 }
 
@@ -47,6 +47,8 @@
 
     </style>
 
+    
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
 
 }
 
@@ -90,7 +92,6 @@
         </div>
     </div>
     @* Add new Generic Name end here *@
-    
 
 
     @* Generic Name list start here *@
@@ -104,64 +105,68 @@
 
                     @*Table start here*@
 
-                    <table class="table table-bordered table-responsive">
+                    <table class="table table-bordered" id="myTable">
 
                         <thead>
-                        <tr>
-                            <th> # </th>
-                            <th style="width: 100%"> Name </th>
-                            <th> ACTION </th>
-                        </tr>
+                            <tr>
+                                <th> # </th>
+                                <th style="width: 100%"> Name </th>
+                                <th> ACTION </th>
+                            </tr>
                         </thead>
                         <tbody>
 
 
-                        @{
-                            var sl = ViewBag.slNum;
+                            @{
+                                var sl = ViewBag.slNum;
 
-                            foreach (var row in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @(sl++)
-                                    </td>
-                                    <td>@row.Name</td>
-                                    <td>
-                                        @Html.ActionLink("Edit", "Update", "GenericNames", new {id = row.Id}, new {@class = "btn btn-sm btn-primary"})
-                                    </td>
-                                </tr>
+                                foreach (var row in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @(sl++)
+                                        </td>
+                                        <td>@row.Name</td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Update", "GenericNames", new { id = row.Id }, new { @class = "btn btn-sm btn-primary" })
+                                        </td>
+                                    </tr>
+                                }
+
                             }
 
-                        }
-
-                        @*<tr>
-                            <td> 1 </td>
-                            <td> Seclo </td>
-                            <td>
-                                <a class="btn btn-sm btn-primary" href="">Update</a>
-                                <a class="btn btn-sm btn-danger" href="">Delete</a>
-                            </td>
-                        </tr>*@
+                            @*<tr>
+                    <td> 1 </td>
+                    <td> Seclo </td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="">Update</a>
+                        <a class="btn btn-sm btn-danger" href="">Delete</a>
+                    </td>
+                </tr>*@
                         </tbody>
                     </table>
-
+                    
                     @*Table end here*@
 
                     @*@Html.Partial("_Pagination", pager)*@
-                    @{ Html.RenderPartial("_Pagination", pager); }
+                    @*@{ Html.RenderPartial("_Pagination", pager); }*@
 
                 </div>
             </div>
         </div>
     </div>
     @* Generic Name list end here *@
+
+    
+
 </div>
 
 @section Script
 {
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
-
-
-
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
     </script>
 }

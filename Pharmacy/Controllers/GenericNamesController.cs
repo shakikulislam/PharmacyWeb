@@ -45,7 +45,7 @@ namespace Pharmacy.Controllers
 
             var dataList = PaginationList(genericNameList, pg);
 
-            return View(dataList);
+            return View(genericNameList);
         }
 
         [HttpPost]
